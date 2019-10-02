@@ -106,6 +106,12 @@ function getCarModels(item) {
 }
 let carModelsMapped = inventory.map(getCarModels);
 
+// Stretch goal using map() and a callback
+// Get all of the car models from inventory
+let carModelsMappedCallback = inventory.map((item) => {
+  return item.car_model;
+});
+
 // Sort the car models alphabetically for the 'for loop' and map() versions of the code
 // Used the sorting method found here (it's the last example): 
 // https://www.w3schools.com/js/js_array_sort.asp
@@ -120,8 +126,11 @@ function sortArray(array) {
 }
 sortArray(carModels);
 sortArray(carModelsMapped);
+sortArray(carModelsMappedCallback);
 console.log(`Alphabetized car model list using for loop and sort(): ` + JSON.stringify(carModels));
 console.log(`Alphabetized car model list using map() and sort(): ` + JSON.stringify(carModelsMapped));
+console.log(`Alphabetized car model list using map() and sort() and a callback: ` + JSON.stringify(carModelsMappedCallback));
+
 
 
 
@@ -144,6 +153,13 @@ function getCarYears(item) {
 }
 let carYearsMapped = inventory.map(getCarYears);
 console.log(`All years found using map(): ` + JSON.stringify(carYearsMapped));
+
+// Stretch goal using map() and a callback
+// Get all the car years from inventory into new array
+let carYearsMappedCallback = inventory.map((item) => {
+  return item.car_year;
+});
+console.log(`All years found using map() and a callback: ` + JSON.stringify(carYearsMappedCallback));
 
 
 
@@ -169,6 +185,13 @@ function checkYear(year) {
 }
 let oldCarsFiltered = carYears.filter(checkYear);
 console.log(`${oldCarsFiltered.length} cars were made before the year 2000. Found using filter().`);
+
+// Stretch goal using filter() and a callback
+// Find all cars made before 2000 and put into new array
+let oldCarsFilteredCallback = carYears.filter((year) => {
+  return year < 2000;
+});
+console.log(`${oldCarsFilteredCallback.length} cars were made before the year 2000. Found using filter() and a callback.`);
 
 
 
@@ -196,3 +219,12 @@ function filterBmwAndAudi(car) {
 }
 let bmwAndAudiFiltered = inventory.filter(filterBmwAndAudi);
 console.log(`All BMW's and Audi's found using filter(): ` + JSON.stringify(bmwAndAudiFiltered));
+
+// Stretch goal using filter() and a callback
+// Find all cars with make BMW and Audi and put into new array
+let bmwAndAudiFilteredCallback = inventory.filter((car) => {
+  if (car.car_make === "BMW" || car.car_make === "Audi") {
+    return true;
+  }
+});
+console.log(`All BMW's and Audi's found using filter() and a callback: ` + JSON.stringify(bmwAndAudiFilteredCallback));
