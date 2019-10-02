@@ -75,66 +75,127 @@ let inventory = [
 // console.log(evens);
 // [12, 14]
 
+
 // ==== Challenge 1 ====
 // The dealer can't recall the information for a car with an id of 33 on his lot. Help the 
 // dealer find out which car has an id of 33 by logging the car's year, make, and model in 
 //the console log provided to you below:
 console.log(`Car 33 is a ${inventory[32].car_year} ${inventory[32].car_make} ${inventory[32].car_model}.`);
 
+
 // ==== Challenge 2 ====
 // The dealer needs the information on the last car in their inventory.  What is the make 
 //and model of the last car in the inventory?  Log the make and model into the console.
 console.log(`The last car is a ${inventory[inventory.length-1].car_make} ${inventory[inventory.length-1].car_model}.`);
 
+
 // ==== Challenge 3 ====
 // The marketing team wants the car models listed alphabetically on the website. Sort all 
 // the car model names into alphabetical order and log the results in the console
-let carModels = inventory;
 
-// used the sorting method here (it's the last example): 
+let carModels = [];
+// Get all of the car models from inventory
+for (let i = 0 ; i < inventory.length ; i++) {
+  carModels.push(inventory[i].car_model);
+}
+
+// Stretch goal using map()
+// Get all of the car models from inventory
+function getCarModels(item) {
+  return item.car_model;
+}
+let carModelsMapped = inventory.map(getCarModels);
+
+// Sort the car models alphabetically for the 'for loop' and map() versions of the code
+// Used the sorting method found here (it's the last example): 
 // https://www.w3schools.com/js/js_array_sort.asp
-
 carModels.sort((a, b) => {
-  var x = a.car_model.toLowerCase();
-  var y = b.car_model.toLowerCase();
+  var x = a.toLowerCase();
+  var y = b.toLowerCase();
   if (x < y) {return -1;}
   if (x > y) {return 1;}
   return 0;
 });
+carModelsMapped.sort((a, b) => {
+  var x = a.toLowerCase();
+  var y = b.toLowerCase();
+  if (x < y) {return -1;}
+  if (x > y) {return 1;}
+  return 0;
+});
+console.log(`Alphabetized car model list using for loop and sort(): ` + JSON.stringify(carModels));
+console.log(`Alphabetized car model list using map() and sort(): ` + JSON.stringify(carModelsMapped));
 
-for (let i = 0 ; i < carModels.length ; i++) {
-  console.log(`${i + 1} ${carModels[i].car_model}`);
-}
+
 
 // ==== Challenge 4 ====
 // The accounting team needs all the years from every car on the lot. Create a new array 
 // from the dealer data containing only the car years and log the result in the console.
+
 let carYears = [];
+// Get all the car years from inventory into new array
 for (let i = 0 ; i < inventory.length ; i++) {
   carYears.push(inventory[i].car_year);
-  console.log(`${i + 1} ${carYears[i]}`);
 }
+console.log(`All years found using for loop: ` + JSON.stringify(carYears));
+
+
+// Stretch goal using map()
+// Get all the car years from inventory into new array
+function getCarYears(item) {
+  return item.car_year;
+}
+let carYearsMapped = inventory.map(getCarYears);
+console.log(`All years found using map(): ` + JSON.stringify(carYearsMapped));
+
+
 
 // ==== Challenge 5 ====
 // The car lot manager needs to find out how many cars are older than the year 2000. 
 // Using the carYears array you just created, find out how many cars were made before the 
 // year 2000 by populating the array oldCars and logging its length.
+
 let oldCars = [];
+// Find all cars made before 2000 and put into new array
 for (let i = 0 ; i < carYears.length ; i++) {
     if (carYears[i] < 2000) {
       oldCars.push(carYears[i]);
     }
 }
-console.log(`${oldCars.length} cars were made before the year 2000.`);
+console.log(`${oldCars.length} cars were made before the year 2000. Found using for loop.`);
+
+
+// Stretch goal using filter()
+// Find all cars made before 2000 and put into new array
+function checkYear(year) {
+  return year < 2000;
+}
+let oldCarsFiltered = carYears.filter(checkYear);
+console.log(`${oldCarsFiltered.length} cars were made before the year 2000. Found using filter().`);
+
+
 
 // ==== Challenge 6 ====
 // A buyer is interested in seeing only BMW and Audi cars within the inventory. Return an 
 // array that only contains BMW and Audi cars.  Once you have populated the BMWAndAudi 
 // array, use JSON.stringify() to show the results of the array in the console.
+
 let BMWAndAudi = [];
+// Find all cars with make BMW and Audi and put into new array
 for (let i = 0 ; i < inventory.length ; i++) {
   if (inventory[i].car_make === "BMW" || inventory[i].car_make === "Audi") {
     BMWAndAudi.push(inventory[i]);
   }
 }
-console.log(JSON.stringify(BMWAndAudi));
+console.log(`All BMW's and Audi's found using for loop: ` + JSON.stringify(BMWAndAudi));
+
+
+// Stretch goal using filter()
+// Find all cars with make BMW and Audi and put into new array
+function filterBmwAndAudi(car) {
+  if (car.car_make === "BMW" || car.car_make === "Audi") {
+    return true;
+  }
+}
+let bmwAndAudiFiltered = inventory.filter(filterBmwAndAudi);
+console.log(`All BMW's and Audi's found using filter(): ` + JSON.stringify(bmwAndAudiFiltered));
