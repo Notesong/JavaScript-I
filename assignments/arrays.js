@@ -109,20 +109,17 @@ let carModelsMapped = inventory.map(getCarModels);
 // Sort the car models alphabetically for the 'for loop' and map() versions of the code
 // Used the sorting method found here (it's the last example): 
 // https://www.w3schools.com/js/js_array_sort.asp
-carModels.sort((a, b) => {
-  var x = a.toLowerCase();
-  var y = b.toLowerCase();
-  if (x < y) {return -1;}
-  if (x > y) {return 1;}
-  return 0;
-});
-carModelsMapped.sort((a, b) => {
-  var x = a.toLowerCase();
-  var y = b.toLowerCase();
-  if (x < y) {return -1;}
-  if (x > y) {return 1;}
-  return 0;
-});
+function sortArray(array) {
+  array.sort((a, b) => {
+     var x = a.toLowerCase();
+     var y = b.toLowerCase();
+     if (x < y) {return -1;}
+     if (x > y) {return 1;}
+     return 0;
+  });
+}
+sortArray(carModels);
+sortArray(carModelsMapped);
 console.log(`Alphabetized car model list using for loop and sort(): ` + JSON.stringify(carModels));
 console.log(`Alphabetized car model list using map() and sort(): ` + JSON.stringify(carModelsMapped));
 
