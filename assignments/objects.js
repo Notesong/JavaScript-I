@@ -107,7 +107,7 @@ const parent = {
       speakName: function() {console.log(this.name)},
     }
   }
-}
+};
 
 // Log the parent object's name
 console.log(parent.name);
