@@ -1,6 +1,8 @@
-// To help us use arrays with real world problems we are going to simulate a used car dealer that has 50 cars in their inventory.
+// To help us use arrays with real world problems we are going to simulate a used 
+// car dealer that has 50 cars in their inventory.
 
-// The car dealer has all of their inventory housed in the array seen below.  Scroll down past the data to find out how you can help the car dealer.
+// The car dealer has all of their inventory housed in the array seen below.  Scroll 
+// down past the data to find out how you can help the car dealer.
 
 let inventory = [
   { id: 1, car_make: "Lincoln", car_model: "Navigator", car_year: 2009 },
@@ -73,32 +75,156 @@ let inventory = [
 // console.log(evens);
 // [12, 14]
 
+
 // ==== Challenge 1 ====
-// The dealer can't recall the information for a car with an id of 33 on his lot. Help the dealer find out which car has an id of 33 by logging the car's year, make, and model in the console log provided to you below:
-console.log(`Car 33 is a *car year goes here* *car make goes here* *car model goes here*`);
+// The dealer can't recall the information for a car with an id of 33 on his lot. Help the 
+// dealer find out which car has an id of 33 by logging the car's year, make, and model in 
+//the console log provided to you below:
+console.log(`Car 33 is a ${inventory[32].car_year} ${inventory[32].car_make} ${inventory[32].car_model}.`);
+
 
 // ==== Challenge 2 ====
-// The dealer needs the information on the last car in their inventory.  What is the make and model of the last car in the inventory?  Log the make and model into the console.
-let lastCar = 0;
-console.log();
+// The dealer needs the information on the last car in their inventory.  What is the make 
+//and model of the last car in the inventory?  Log the make and model into the console.
+console.log(`The last car is a ${inventory[inventory.length-1].car_make} ${inventory[inventory.length-1].car_model}.`);
+
 
 // ==== Challenge 3 ====
-// The marketing team wants the car models listed alphabetically on the website. Sort all the car model names into alphabetical order and log the results in the console
+// The marketing team wants the car models listed alphabetically on the website. Sort all 
+// the car model names into alphabetical order and log the results in the console
+
 let carModels = [];
-let carModelsSorted = [];
-console.log();
+// Get all of the car models from inventory
+for (let i = 0 ; i < inventory.length ; i++) {
+  carModels.push(inventory[i].car_model);
+}
+
+// Stretch goal using map()
+// Get all of the car models from inventory
+function getCarModels(item) {
+  return item.car_model;
+}
+let carModelsMapped = inventory.map(getCarModels);
+
+// Stretch goal using map() and a callback
+// Get all of the car models from inventory
+let carModelsMappedCallback = inventory.map((item) => {
+  return item.car_model;
+});
+
+// Sort the car models alphabetically for the 'for loop' and map() versions of the code
+// Used the sorting method found here (it's the last example): 
+// https://www.w3schools.com/js/js_array_sort.asp
+function sortArray(array) {
+  array.sort((a, b) => {
+     var x = a.toLowerCase();
+     var y = b.toLowerCase();
+     if (x < y) {return -1;}
+     if (x > y) {return 1;}
+     return 0;
+  });
+}
+sortArray(carModels);
+sortArray(carModelsMapped);
+sortArray(carModelsMappedCallback);
+console.log(`Alphabetized car model list using for loop and sort(): ` + JSON.stringify(carModels));
+console.log(`Alphabetized car model list using map() and sort(): ` + JSON.stringify(carModelsMapped));
+console.log(`Alphabetized car model list using map() and sort() and a callback: ` + JSON.stringify(carModelsMappedCallback));
+
+
+
 
 // ==== Challenge 4 ====
-// The accounting team needs all the years from every car on the lot. Create a new array from the dealer data containing only the car years and log the result in the console.
+// The accounting team needs all the years from every car on the lot. Create a new array 
+// from the dealer data containing only the car years and log the result in the console.
+
 let carYears = [];
-console.log();
+// Get all the car years from inventory into new array
+for (let i = 0 ; i < inventory.length ; i++) {
+  carYears.push(inventory[i].car_year);
+}
+console.log(`All years found using for loop: ` + JSON.stringify(carYears));
+
+
+// Stretch goal using map()
+// Get all the car years from inventory into new array
+function getCarYears(item) {
+  return item.car_year;
+}
+let carYearsMapped = inventory.map(getCarYears);
+console.log(`All years found using map(): ` + JSON.stringify(carYearsMapped));
+
+// Stretch goal using map() and a callback
+// Get all the car years from inventory into new array
+let carYearsMappedCallback = inventory.map((item) => {
+  return item.car_year;
+});
+console.log(`All years found using map() and a callback: ` + JSON.stringify(carYearsMappedCallback));
+
+
 
 // ==== Challenge 5 ====
-// The car lot manager needs to find out how many cars are older than the year 2000. Using the carYears array you just created, find out how many cars were made before the year 2000 by populating the array oldCars and logging it's length.
+// The car lot manager needs to find out how many cars are older than the year 2000. 
+// Using the carYears array you just created, find out how many cars were made before the 
+// year 2000 by populating the array oldCars and logging its length.
+
 let oldCars = [];
-console.log();
+// Find all cars made before 2000 and put into new array
+for (let i = 0 ; i < carYears.length ; i++) {
+    if (carYears[i] < 2000) {
+      oldCars.push(carYears[i]);
+    }
+}
+console.log(`${oldCars.length} cars were made before the year 2000. Found using for loop.`);
+
+
+// Stretch goal using filter()
+// Find all cars made before 2000 and put into new array
+function checkYear(year) {
+  return year < 2000;
+}
+let oldCarsFiltered = carYears.filter(checkYear);
+console.log(`${oldCarsFiltered.length} cars were made before the year 2000. Found using filter().`);
+
+// Stretch goal using filter() and a callback
+// Find all cars made before 2000 and put into new array
+let oldCarsFilteredCallback = carYears.filter((year) => {
+  return year < 2000;
+});
+console.log(`${oldCarsFilteredCallback.length} cars were made before the year 2000. Found using filter() and a callback.`);
+
+
 
 // ==== Challenge 6 ====
-// A buyer is interested in seeing only BMW and Audi cars within the inventory. Return an array that only contains BMW and Audi cars.  Once you have populated the BMWAndAudi array, use JSON.stringify() to show the results of the array in the console.
+// A buyer is interested in seeing only BMW and Audi cars within the inventory. Return an 
+// array that only contains BMW and Audi cars.  Once you have populated the BMWAndAudi 
+// array, use JSON.stringify() to show the results of the array in the console.
+
 let BMWAndAudi = [];
-console.log();
+// Find all cars with make BMW and Audi and put into new array
+for (let i = 0 ; i < inventory.length ; i++) {
+  if (inventory[i].car_make === "BMW" || inventory[i].car_make === "Audi") {
+    BMWAndAudi.push(inventory[i]);
+  }
+}
+console.log(`All BMW's and Audi's found using for loop: ` + JSON.stringify(BMWAndAudi));
+
+
+// Stretch goal using filter()
+// Find all cars with make BMW and Audi and put into new array
+function filterBmwAndAudi(car) {
+  if (car.car_make === "BMW" || car.car_make === "Audi") {
+    return true;
+  }
+}
+let bmwAndAudiFiltered = inventory.filter(filterBmwAndAudi);
+console.log(`All BMW's and Audi's found using filter(): ` + JSON.stringify(bmwAndAudiFiltered));
+
+// Stretch goal using filter() and a callback
+// Find all cars with make BMW and Audi and put into new array
+let bmwAndAudiFilteredCallback = inventory.filter((car) => {
+  if (car.car_make === "BMW" || car.car_make === "Audi") {
+    return true;
+  }
+});
+console.log(`All BMW's and Audi's found using filter() and a callback: ` + JSON.stringify(bmwAndAudiFilteredCallback));
